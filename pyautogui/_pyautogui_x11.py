@@ -181,6 +181,8 @@ def _keyUp(key):
 # Taken from PyKeyboard's ctor function.
 _display = Display(os.environ['DISPLAY'])
 
+# Load XF86 Keysym definitions for special function keys
+Xlib.XK.load_keysym_group('xf86')
 
 """ Information for keyboardMapping derived from PyKeyboard's special_key_assignment() function.
 
@@ -314,6 +316,14 @@ keyboardMapping.update({
     '|': _display.keysym_to_keycode(Xlib.XK.string_to_keysym('bar')),
     '}': _display.keysym_to_keycode(Xlib.XK.string_to_keysym('braceright')),
     '~': _display.keysym_to_keycode(Xlib.XK.string_to_keysym('asciitilde')),
+
+    # XF86 special function keys
+    'volumeup':         _display.keysym_to_keycode(Xlib.XK.string_to_keysym('XF86_AudioRaiseVolume')),
+    'volumedown':       _display.keysym_to_keycode(Xlib.XK.string_to_keysym('XF86_AudioLowerVolume')),
+    'volumemute':       _display.keysym_to_keycode(Xlib.XK.string_to_keysym('XF86_AudioMute')),
+    'playpause':        _display.keysym_to_keycode(Xlib.XK.string_to_keysym('XF86_AudioPlay')),
+    'nexttrack':        _display.keysym_to_keycode(Xlib.XK.string_to_keysym('XF86_AudioNext')),
+    'prevtrack':        _display.keysym_to_keycode(Xlib.XK.string_to_keysym('XF86_AudioPrev')),
 })
 
 # Trading memory for time" populate winKB so we don't have to call VkKeyScanA each time.
